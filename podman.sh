@@ -18,6 +18,12 @@ if [ ! -f /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list ]; the
 fi
 
 # Clean previous podman installations, just in case
+apt remove -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+#rm -f /etc/systemd/system/docker.socket
+#rm -f /etc/systemd/system/sockets.target.wants/docker.socket
+#rm -f /etc/systemd/system/multi-user.target.wants/docker.service
+
 #rm -f /etc/systemd/system/podman.service
 #rm -f /etc/systemd/system/podman-restart.service
 #rm -f /etc/systemd/system/podman-auto-update.service
