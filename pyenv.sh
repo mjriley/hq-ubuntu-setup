@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"' >> $HOME/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> $HOME/.bashrc
+# reboot shell to read the pyenv configuration
+source $HOME/.bashrc
+
+pyenv install 3.9.18
+pyenv global 3.9.18
+pyenv virtualenv 3.9.18 hq
+pyenv local hq
+
+# configure HQ
+git submodule update --init --recursive
+git-hooks/install.sh
+pip install -r requirements/dev-requirements.txt
+cp localsettings.example.py localsettings.py
+mkdir sharedfiles
+
