@@ -1,3 +1,8 @@
+if [ -z "$SUDO_USER" ]; then
+    echo "This script is intended to be run as sudo. Exiting"
+    exit 1
+fi
+
 # TODO: detect and toggle between bash and zsh
 
 add-apt-repository -y ppa:deadsnakes/ppa
@@ -19,5 +24,5 @@ apt install -y postgresql-client
 # Install & Configure pyenv
 apt install -y curl
 
-sudo -u $SUDO_USER ./pyenv.sh
+sudo -u $SUDO_USER ./setup/pyenv.sh
 

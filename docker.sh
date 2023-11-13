@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ -z "$SUDO_USER" ]; then
-    echo "Insufficient privileges. Please re-run this script as sudo"
+    echo "This script is intended to be run as sudo. Exiting"
     exit 1
 fi
 
