@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -S bash -i
+
+# the above shebang causes the script to run in interactive mode.
+# Without interactive mode, the default Ubuntu .bashrc exits immediately, so the below `source` command will fail
+# There is probably a much better way to handle this
 
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 
