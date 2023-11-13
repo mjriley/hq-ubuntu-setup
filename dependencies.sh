@@ -15,6 +15,7 @@ libxmlsec1-openssl libxslt1-dev libpq-dev pkg-config gettext make build-essentia
 libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
 libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
 
+apt install -y curl
 # XClip (optional for scripting)
 apt install -y xclip
 
@@ -24,8 +25,10 @@ apt install -y openjdk-17-jre
 # Install Postgress Client (optional)
 apt install -y postgresql-client
 
-# Install & Configure pyenv
-apt install -y curl
+# Install Node and NPM Reqs
+setup/node.sh
 
+# Install & Configure pyenv
 sudo -u $SUDO_USER setup/pyenv.sh
 
+#sudo -u $SUDO_USER setup/frontend.sh
