@@ -12,8 +12,8 @@ if [[ $CONTAINERS_READY != "ready" ]]; then
     exit 1
 fi
 
-read -r DB_NAME DB_USER DB_PASS < <(python -c 'import localsettings; db=localsettings.DATABASES["default"]; print("{} {} {}".format(db["NAME"], db["USER"], db["PASSWORD"]))')
-PGPASSWORD="$DB_PASS" psql -h localhost -p 5432 -U "$DB_USER" -c "CREATE DATABASE commcarehq;"
+#read -r DB_NAME DB_USER DB_PASS < <(python -c 'import localsettings; db=localsettings.DATABASES["default"]; print("{} {} {}".format(db["NAME"], db["USER"], db["PASSWORD"]))')
+#PGPASSWORD="$DB_PASS" psql -h localhost -p 5432 -U "$DB_USER" -c "CREATE DATABASE commcarehq;"
 
 read -r COUCH_USER COUCH_PASS < <(python -c 'import localsettings; db=localsettings.COUCH_DATABASES["default"]; print("{} {}".format(db["COUCH_USERNAME"], db["COUCH_PASSWORD"]))')
 
