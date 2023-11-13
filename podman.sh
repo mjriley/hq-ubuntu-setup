@@ -58,5 +58,8 @@ mkdir -p $DOCKER_BIN_FOLDER
 cp setup/fake-docker $DOCKER_DEST
 chown -R $SUDO_UID:$SUDO_GID $DOCKER_DEST
 
+echo "export DOCKER_HOST=unix://\$XDG_RUNTIME_DIR/podman/podman.sock" >> $USER_HOME/.bashrc
+echo "export DOCKER_SOCK=\$XDG_RUNTIME_DIR/podman/podman.sock" >> $USER_HOME/.bashrc
+
 echo "PATH=\$HOME/.local/bin:\$PATH" >> $USER_HOME/.bashrc
 
