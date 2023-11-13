@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -S bash -i
 
 # Prompt to run containers
 echo "Please start up the containers if not already started"

@@ -31,4 +31,12 @@ setup/node.sh
 # Install & Configure pyenv
 sudo -u $SUDO_USER setup/pyenv.sh
 
-#sudo -u $SUDO_USER setup/frontend.sh
+sudo -u $SUDO_USER setup/frontend.sh
+
+setup/podman.sh
+
+sudo -u $SUDO_USER setup/database.sh
+
+echo "Installation and setup complete"
+echo "Please open a new terminal to access the updated environment"
+echo "You can then run the server with './manage.py runserver 0.0.0.0:8000'"
