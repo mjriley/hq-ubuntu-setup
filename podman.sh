@@ -58,3 +58,7 @@ mkdir -p $DOCKER_BIN_FOLDER
 cp fake-docker $DOCKER_DEST
 chown -R $SUDO_UID:$SUDO_GID $DOCKER_DEST
 
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    echo "PATH=$HOME/.local/bin:$PATH" >> $HOME/.bashrc
+fi
+
