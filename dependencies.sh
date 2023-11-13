@@ -15,6 +15,9 @@ libxmlsec1-openssl libxslt1-dev libpq-dev pkg-config gettext make build-essentia
 libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
 libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
 
+# XClip (optional for scripting)
+apt install -y xclip
+
 # Install JDK
 apt install -y openjdk-17-jre
 

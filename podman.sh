@@ -55,10 +55,8 @@ DOCKER_BIN_FOLDER=${USER_HOME}/.local/bin
 DOCKER_DEST=${DOCKER_BIN_FOLDER}/docker
 
 mkdir -p $DOCKER_BIN_FOLDER
-cp fake-docker $DOCKER_DEST
+cp setup/fake-docker $DOCKER_DEST
 chown -R $SUDO_UID:$SUDO_GID $DOCKER_DEST
 
-if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    echo "PATH=$HOME/.local/bin:$PATH" >> $HOME/.bashrc
-fi
+echo "PATH=\$HOME/.local/bin:\$PATH" >> $USER_HOME/.bashrc
 
