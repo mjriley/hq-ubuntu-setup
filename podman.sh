@@ -24,6 +24,8 @@ apt remove -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-
 #rm -f /etc/systemd/system/sockets.target.wants/docker.socket
 #rm -f /etc/systemd/system/multi-user.target.wants/docker.service
 
+# Also might want to take care of /var/lib/docker (containers and images still stored here)
+
 #rm -f /etc/systemd/system/podman.service
 #rm -f /etc/systemd/system/podman-restart.service
 #rm -f /etc/systemd/system/podman-auto-update.service
@@ -39,11 +41,20 @@ apt remove -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-
 # /usr/lib/systemd/user/podman.service
 
 apt install -y podman podman-docker
-
+# not ignoring recommended packages pulls a normal docker install -- we just need the docker-compose binary
+apt install --no-install-recommends -y docker-compose
 
 # Install flatpak
 apt install -y flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub io.podman_desktop.PodmanDesktop
 
-export RESTART_REQUIRED=1
+# Mimic docker-compose support
+USER_HOME=$(eval echo ~$SUDO_USER)
+DOCKER_BIN_FOLDER=${USER_HOME}/.local/bin
+DOCKER_DEST=${DOCKER_BIN_FOLDER}/docker
+
+mkdir -p $DOCKER_BIN_FOLDER
+cp fake-docker $DOCKER_DEST
+chown -R $SUDO_UID:$SUDO_GID $DOCKER_DEST
+
