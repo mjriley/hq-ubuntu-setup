@@ -16,3 +16,6 @@ echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.co
 apt-get update
 apt-get install nodejs -y
 
+npm install --global yarn
+npm install --global sass
+
