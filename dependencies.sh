@@ -24,5 +24,5 @@ apt install -y postgresql-client
 # Install & Configure pyenv
 apt install -y curl
 
-sudo -u $SUDO_USER ./setup/pyenv.sh
+sudo -u $SUDO_USER setup/pyenv.sh
 
