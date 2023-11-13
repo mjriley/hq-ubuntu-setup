@@ -2,7 +2,7 @@
 
 if [ -z "$SUDO_USER" ]; then
     echo "This script is intended to be run as sudo. Exiting"
-    return 1
+    exit 1
 fi
 
 apt-get update
