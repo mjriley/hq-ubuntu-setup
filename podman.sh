@@ -63,5 +63,5 @@ echo "export DOCKER_SOCK=\$XDG_RUNTIME_DIR/podman/podman.sock" >> $USER_HOME/.ba
 
 echo "PATH=\$HOME/.local/bin:\$PATH" >> $USER_HOME/.bashrc
 
-systemctl --user enable podman.socket
+systemctl --user enable --now podman.socket
 
