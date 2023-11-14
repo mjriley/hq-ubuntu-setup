@@ -14,6 +14,9 @@ remove_podman () {
     USER_HOME=$(eval echo ~$SUDO_USER)
     rm ${USER_HOME}/.local/bin/docker
 
+    # Remove the podman socket configuration
+    sed -i '/podman\.sock/d' ${USER_HOME}/.bashrc
+
     flatpak uninstall -y io.podman_desktop.PodmanDesktop
     apt remove -y podman podman-docker docker-compose
 }
