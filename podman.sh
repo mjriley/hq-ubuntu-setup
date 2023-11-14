@@ -60,9 +60,9 @@ if [[ "$UBUNTU_MAJOR_VERS" -lt "23" ]]; then
     apt install --no-install-recommends -y docker-compose
 
     # Fix a bug that ships with 22.04
-    curl -O --output-dir "/tmp" http://archive.ubuntu.com/ubuntu/pool/universe/g/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-1_amd64.deb
-    apt install /tmp/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-1_amd64.deb
-    rm /tmp/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-1_amd64.deb
+    #curl -O --output-dir "/tmp" http://archive.ubuntu.com/ubuntu/pool/universe/g/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-3_amd64.deb
+    #apt install /tmp/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-3_amd64.deb
+    #rm /tmp/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-3_amd64.deb
 fi
 
 # Install flatpak
