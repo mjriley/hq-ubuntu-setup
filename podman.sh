@@ -18,9 +18,10 @@ add_sources () {
         curl -fsSL "https://download.opensuse.org/repositories/devel:kubic:libcontainers:unstable/xUbuntu_$(lsb_release -rs)/Release.key" \
           | gpg --dearmor \
           | tee /etc/apt/keyrings/devel_kubic_libcontainers_unstable.gpg > /dev/null
+        # NOTE: opensuse seems to be having https difficulties, so switching to http temporarily
         echo \
           "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/devel_kubic_libcontainers_unstable.gpg]\
-            https://download.opensuse.org/repositories/devel:kubic:libcontainers:unstable/xUbuntu_$(lsb_release -rs)/ /" \
+            http://download.opensuse.org/repositories/devel:kubic:libcontainers:unstable/xUbuntu_$(lsb_release -rs)/ /" \
           | tee /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list > /dev/null
         apt-get update -qq
     fi
@@ -52,10 +53,16 @@ apt remove -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-
 # /usr/lib/systemd/user/podman.service
 
 apt install -y podman podman-docker
+apt install -y systemd-container  # Necessary to load the socket within this script
 
 if [[ "$UBUNTU_MAJOR_VERS" -lt "23" ]]; then
     # not ignoring recommended packages pulls a normal docker install -- we just need the docker-compose binary
     apt install --no-install-recommends -y docker-compose
+
+    # Fix a bug that ships with 22.04
+    curl -O --output-dir "/tmp" http://archive.ubuntu.com/ubuntu/pool/universe/g/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-1_amd64.deb
+    apt install /tmp/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-1_amd64.deb
+    rm /tmp/golang-github-containernetworking-plugins/containernetworking-plugins_1.1.1+ds1-1_amd64.deb
 fi
 
 # Install flatpak
@@ -77,5 +84,6 @@ echo "export DOCKER_SOCK=\$XDG_RUNTIME_DIR/podman/podman.sock" >> $USER_HOME/.ba
 
 echo "PATH=\$HOME/.local/bin:\$PATH" >> $USER_HOME/.bashrc
 
-sudo -u $SUDO_USER systemctl --user enable --now podman.socket
+#sudo -u $SUDO_USER systemctl --user enable --now podman.socket
+machinectl shell $SUDO_USER@ $(which systemctl) --user eanble --now podman.socket
 
