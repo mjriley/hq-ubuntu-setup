@@ -85,5 +85,5 @@ echo "export DOCKER_SOCK=\$XDG_RUNTIME_DIR/podman/podman.sock" >> $USER_HOME/.ba
 echo "PATH=\$HOME/.local/bin:\$PATH" >> $USER_HOME/.bashrc
 
 #sudo -u $SUDO_USER systemctl --user enable --now podman.socket
-machinectl shell $SUDO_USER@ $(which systemctl) --user eanble --now podman.socket
+machinectl shell $SUDO_USER@ $(which systemctl) --user enable --now podman.socket
 
