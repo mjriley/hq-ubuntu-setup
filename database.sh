@@ -22,6 +22,6 @@ curl -X PUT http://"$COUCH_USER":"$COUCH_PASS"@127.0.0.1:5984/_replicator
 
 ./manage.py sync_couch_views
 ./manage.py create_kafka_topics
-./manage.py ptop_preindex
 env CCHQ_IS_FRESH_INSTALL=1 ./manage.py migrate --noinput
+./manage.py ptop_preindex
 
