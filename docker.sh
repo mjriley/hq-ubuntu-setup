@@ -5,6 +5,21 @@ if [ -z "$SUDO_USER" ]; then
     exit 1
 fi
 
+remove_podman () {
+    command -v podman
+    if [[ $? -ne 0 ]]; then
+        return
+    fi
+
+    USER_HOME=$(eval echo ~$SUDO_USER)
+    rm ${USER_HOME}/.local/bin/docker
+
+    flatpak uninstall -y io.podman_desktop.PodmanDesktop
+    apt remove -y podman podman-docker docker-compose
+}
+
+remove_podman
+
 # Add Docker's official GPG key:
 apt-get update
 apt-get install ca-certificates curl gnupg
