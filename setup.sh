@@ -20,26 +20,27 @@ MAX_STEPS=5
 
 run_setup () {
     START="$1"; shift
-    [ -z "$START" ]] && START=1
+    [ -z "$START" ] && START=1
 
     CONTAINER="$1";  shift
     [ -z "$CONTAINER" ] && CONTAINER="$(< .setup_container)"
     CONTAINER="${CONTAINER:-podman}"
+    echo "$CONTAINER" > .setup_container
 
-    for i in $(seq "$START" "$MAXSTEPS"); do
+    for i in $(seq "$START" "$MAX_STEPS"); do
         echo $i > .setup_progress
         run_segment $i
     done
 
     rm  .setup_progress
-    rm  .setup_database
+    rm  .setup_container
 
     echo "Installation and setup complete"
     echo "Please open a new terminal to access the updated environment"
     echo "You can then run the server with './manage.py runserver 0.0.0.0:8000'"
 }
 
-depedendencies () {
+dependencies () {
     echo "setting up dependencies"
     setup/dependencies.sh
 }
@@ -72,5 +73,5 @@ databases () {
 
 touch .setup_progress
 touch .setup_container
-run_setup $(< .setup_progress)
+run_setup "$(< .setup_progress)" $@
 
