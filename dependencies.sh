@@ -25,3 +25,5 @@ apt install -y openjdk-17-jre
 # Install Postgress Client (optional)
 apt install -y postgresql-client
 
+setup/node.sh
+
